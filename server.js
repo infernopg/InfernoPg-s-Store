@@ -178,7 +178,7 @@ app.delete("/api/admin/games/:id", auth, (req,res) => {
   res.json({ok:true});
 });
 
-app.get("*", (_req,res) => res.sendFile(path.join(PUBLIC,"index.html")));
+app.get("/{*splat}", (_req,res) => res.sendFile(path.join(PUBLIC,"index.html")));
 app.use((err,_req,res,_next) => res.status(400).json({error:err.message}));
 
 app.listen(PORT, () => console.log(`Inferno's Store running on http://localhost:${PORT}`));
