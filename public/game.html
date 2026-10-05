@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Game — Inferno's Store</title><link rel="stylesheet" href="/styles.css"></head><body>
+<header class="nav"><a class="brand" href="/"><span class="brand-mark">I</span><span>INFERNO'S <b>STORE</b></span></a><nav><a href="/#games">Games</a><a href="/#about">About</a><a href="/#rating">Rating</a></nav></header>
+<main class="detail section"><a class="back" href="/#games">← Back to games</a><div id="detail"></div></main>
+<footer><div class="footer-brand">INFERNO'S STORE</div><p>Download quality games. Discover new experiences.</p><div class="footer-bottom"><span>© 2026 Inferno's Store. All Rights Reserved.</span></div></footer>
+<script>
+const slug=new URLSearchParams(location.search).get("slug");
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+fetch("/api/games/"+encodeURIComponent(slug)).then(r=>r.json()).then(g=>{
+ if(g.error) throw Error(g.error);
+ document.title=g.name+" — Inferno's Store";
+ const stars="★".repeat(Math.round(g.live_rating||0))+"☆".repeat(5-Math.round(g.live_rating||0));
+ document.getElementById("detail").innerHTML=`<div class="detail-grid"><div class="detail-cover"><img src="${esc(g.thumbnail)}" alt="${esc(g.name)}"></div><div class="detail-copy"><p class="eyebrow">${esc(g.genre)}</p><h1>${esc(g.name)}</h1><p class="lead">${esc(g.description)}</p><div class="meta"><span>VERSION <b>${esc(g.version)}</b></span><span>SIZE <b>${esc(g.file_size)}</b></span><span>RELEASED <b>${esc(g.release_date)}</b></span></div><div class="big-rating">${stars} <small>${Number(g.live_rating||0).toFixed(1)} / 5 (${g.rating_count})</small></div><button class="btn primary" id="download">Download Game ↓</button></div></div><div class="reviews"><h2>Recent Reviews</h2>${g.reviews.length?g.reviews.map(r=>`<article><b>${"★".repeat(r.rating)}${"☆".repeat(5-r.rating)}</b><p>${esc(r.review||"No comment")}</p></article>`).join(""):"<p class='muted'>No reviews yet.</p>"}</div>`;
+ document.getElementById("download").onclick=async()=>{const r=await fetch("/api/games/"+g.id+"/download",{method:"POST"});const d=await r.json();if(d.url) location.href=d.url;};
+}).catch(e=>document.getElementById("detail").innerHTML="<div class='empty'>Game not found.</div>");
+</script></body></html>
