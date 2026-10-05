@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
-<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#12070b"/><stop offset=".55" stop-color="#4d1021"/><stop offset="1" stop-color="#090909"/></linearGradient></defs>
-<rect width="1200" height="700" fill="url(#g)"/><circle cx="950" cy="120" r="210" fill="#8c1c37" opacity=".22"/><circle cx="200" cy="600" r="280" fill="#2a0912" opacity=".8"/>
-<path d="M0 580 L380 300 L650 470 L920 230 L1200 500 V700 H0Z" fill="#080808" opacity=".8"/>
-<text x="80" y="510" fill="#b52b4a" font-family="Arial,sans-serif" font-size="32" font-weight="700" letter-spacing="10">INFERNO'S STORE</text>
-<text x="80" y="590" fill="#fff" font-family="Arial,sans-serif" font-size="62" font-weight="900">DARK QUEST</text>
-</svg>
