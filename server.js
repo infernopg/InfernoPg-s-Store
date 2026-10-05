@@ -177,7 +177,7 @@ app.delete("/api/admin/games/:id", auth, (req,res) => {
   db.prepare("DELETE FROM games WHERE id=?").run(req.params.id);
   res.json({ok:true});
 });
-
+app.get("/", (_req, res) => res.sendFile(path.join(PUBLIC, "index.html")));
 app.get("/{*splat}", (_req,res) => res.sendFile(path.join(PUBLIC,"index.html")));
 app.use((err,_req,res,_next) => res.status(400).json({error:err.message}));
 
